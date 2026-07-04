@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # 1. PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: fedsoc-db
+    environment:
+      POSTGRES_USER: fedsoc_admin
+      POSTGRES_PASSWORD: fedsoc_secure_password
+      POSTGRES_DB: fedsoc_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docs/supabase_schema.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fedsoc_admin -d fedsoc_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. Flower Federated Server Coordinator
+  superlink:
+    image: python:3.10-slim
+    container_name: fedsoc-superlink
+    working_dir: /app
+    volumes:
+      - ./python/fedcore:/app
+    command: python -m fedcore.server.run
+    ports:
+      - "8080:8080"
+    restart: always
+
+  # 3. Next.js Dashboard App
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fedsoc-dashboard
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUPABASE_URL=postgresql://fedsoc_admin:fedsoc_secure_password@db:5432/fedsoc_db
+      - FLOWER_SERVER_URL=http://superlink:8080
+      - OLLAMA_URL=http://host.docker.internal:11434
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  # 4. Nginx Reverse Proxy
+  proxy:
+    image: nginx:alpine
+    container_name: fedsoc-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - dashboard
+    restart: always
+
+volumes:
+  pgdata:

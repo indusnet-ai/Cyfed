@@ -1,0 +1,207 @@
+{
+  "scenarioName": "Botnet Activity Scenario",
+  "steps": {
+    "1": {
+      "organizations": [
+        { "id": "bank",     "name": "Nova-Bank-Node",           "type": "bank",     "status": "online",   "datasetSize": 2200 },
+        { "id": "hospital", "name": "Boston-Central-Hospital",  "type": "hospital", "status": "online",   "datasetSize": 1500 },
+        { "id": "retail",   "name": "Apex-Retail-POS",          "type": "retail",   "status": "online",   "datasetSize": 5000 },
+        { "id": "telecom",  "name": "Nova-Telecom-Node",        "type": "telecom",  "status": "online",   "datasetSize": 4500 }
+      ],
+      "rounds": [],
+      "status": "idle",
+      "currentRound": 0,
+      "globalAccuracy": 0.0,
+      "globalLoss": 0.0,
+      "globalF1": 0.0,
+      "incidents": [],
+      "benchmarks": { "localVsGlobal": {}, "convergence": [], "clientDrift": {}, "communication": [], "scalability": [] }
+    },
+    "2": {
+      "organizations": [
+        { "id": "bank",     "name": "Nova-Bank-Node",           "type": "bank",     "status": "training", "datasetSize": 2200 },
+        { "id": "hospital", "name": "Boston-Central-Hospital",  "type": "hospital", "status": "training", "datasetSize": 1500 },
+        { "id": "retail",   "name": "Apex-Retail-POS",          "type": "retail",   "status": "training", "datasetSize": 5000 },
+        { "id": "telecom",  "name": "Nova-Telecom-Node",        "type": "telecom",  "status": "training", "datasetSize": 4500 }
+      ],
+      "rounds": [
+        { "round": 1, "accuracy": 0.75, "loss": 0.44, "f1": 0.48, "timestamp": "2026-07-03T10:00:00Z" },
+        { "round": 2, "accuracy": 0.86, "loss": 0.30, "f1": 0.61, "timestamp": "2026-07-03T10:01:00Z" },
+        { "round": 3, "accuracy": 0.9805, "loss": 0.081, "f1": 0.528, "timestamp": "2026-07-03T10:02:00Z" }
+      ],
+      "status": "training",
+      "currentRound": 3,
+      "globalAccuracy": 0.9805,
+      "globalLoss": 0.081,
+      "globalF1": 0.528,
+      "incidents": [],
+      "benchmarks": {
+        "localVsGlobal": {
+          "bank":     { "local": { "accuracy": 0.712 }, "global": { "accuracy": 0.9805 } },
+          "hospital": { "local": { "accuracy": 0.698 }, "global": { "accuracy": 0.9805 } },
+          "retail":   { "local": { "accuracy": 0.743 }, "global": { "accuracy": 0.9805 } },
+          "telecom":  { "local": { "accuracy": 0.731 }, "global": { "accuracy": 0.9805 } }
+        },
+        "convergence": [
+          { "round": 1, "accuracy": 0.75,   "loss": 0.44,  "precision": 0.71, "recall": 0.69, "macro_f1": 0.48, "weighted_f1": 0.50 },
+          { "round": 2, "accuracy": 0.86,   "loss": 0.30,  "precision": 0.83, "recall": 0.81, "macro_f1": 0.61, "weighted_f1": 0.63 },
+          { "round": 3, "accuracy": 0.9805, "loss": 0.081, "precision": 0.97, "recall": 0.96, "macro_f1": 0.528,"weighted_f1": 0.95 }
+        ],
+        "clientDrift": {
+          "bank":     [323.62, 310.44, 298.12],
+          "hospital": [290.92, 274.11, 261.80],
+          "retail":   [200.76, 194.55, 188.20],
+          "telecom":  [267.64, 255.30, 241.95]
+        },
+        "communication": [
+          { "round": 1, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.8,  "aggregation_time_sec": 0.3, "total_training_time_sec": 42.1 },
+          { "round": 2, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.75, "aggregation_time_sec": 0.3, "total_training_time_sec": 39.8 },
+          { "round": 3, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.72, "aggregation_time_sec": 0.3, "total_training_time_sec": 38.3 }
+        ],
+        "scalability": [
+          { "clients_count": 2, "estimated_round_duration_sec": 28.0, "estimated_bandwidth_kb": 112.4, "storage_overhead_mb": 0.22, "aggregation_overhead_sec": 0.20 },
+          { "clients_count": 4, "estimated_round_duration_sec": 38.3, "estimated_bandwidth_kb": 224.8, "storage_overhead_mb": 0.44, "aggregation_overhead_sec": 0.30 },
+          { "clients_count": 8, "estimated_round_duration_sec": 52.1, "estimated_bandwidth_kb": 449.6, "storage_overhead_mb": 0.88, "aggregation_overhead_sec": 0.48 }
+        ]
+      }
+    },
+    "5": {
+      "organizations": [
+        { "id": "bank",     "name": "Nova-Bank-Node",           "type": "bank",     "status": "online", "datasetSize": 2200 },
+        { "id": "hospital", "name": "Boston-Central-Hospital",  "type": "hospital", "status": "online", "datasetSize": 1500 },
+        { "id": "retail",   "name": "Apex-Retail-POS",          "type": "retail",   "status": "online", "datasetSize": 5000 },
+        { "id": "telecom",  "name": "Nova-Telecom-Node",        "type": "telecom",  "status": "online", "datasetSize": 4500 }
+      ],
+      "rounds": [
+        { "round": 1, "accuracy": 0.75,   "loss": 0.44,  "f1": 0.48,  "timestamp": "2026-07-03T10:00:00Z" },
+        { "round": 2, "accuracy": 0.86,   "loss": 0.30,  "f1": 0.61,  "timestamp": "2026-07-03T10:01:00Z" },
+        { "round": 3, "accuracy": 0.9805, "loss": 0.081, "f1": 0.528, "timestamp": "2026-07-03T10:02:00Z" }
+      ],
+      "status": "idle",
+      "currentRound": 3,
+      "globalAccuracy": 0.9805,
+      "globalLoss": 0.081,
+      "globalF1": 0.528,
+      "incidents": [
+        {
+          "incident_id": "INC-2026-BOTNET",
+          "timestamp": "2026-07-03T10:05:00Z",
+          "organization": "Apex-Retail-POS",
+          "predicted_attack": "Bot",
+          "confidence": 0.945,
+          "severity": "HIGH"
+        }
+      ],
+      "benchmarks": {
+        "localVsGlobal": {
+          "bank":     { "local": { "accuracy": 0.712 }, "global": { "accuracy": 0.9805 } },
+          "hospital": { "local": { "accuracy": 0.698 }, "global": { "accuracy": 0.9805 } },
+          "retail":   { "local": { "accuracy": 0.743 }, "global": { "accuracy": 0.9805 } },
+          "telecom":  { "local": { "accuracy": 0.731 }, "global": { "accuracy": 0.9805 } }
+        },
+        "convergence": [
+          { "round": 1, "accuracy": 0.75,   "loss": 0.44,  "precision": 0.71, "recall": 0.69, "macro_f1": 0.48,  "weighted_f1": 0.50 },
+          { "round": 2, "accuracy": 0.86,   "loss": 0.30,  "precision": 0.83, "recall": 0.81, "macro_f1": 0.61,  "weighted_f1": 0.63 },
+          { "round": 3, "accuracy": 0.9805, "loss": 0.081, "precision": 0.97, "recall": 0.96, "macro_f1": 0.528, "weighted_f1": 0.95 }
+        ],
+        "clientDrift": {
+          "bank":     [323.62, 310.44, 298.12],
+          "hospital": [290.92, 274.11, 261.80],
+          "retail":   [200.76, 194.55, 188.20],
+          "telecom":  [267.64, 255.30, 241.95]
+        },
+        "communication": [
+          { "round": 1, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.80, "aggregation_time_sec": 0.3, "total_training_time_sec": 42.1 },
+          { "round": 2, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.75, "aggregation_time_sec": 0.3, "total_training_time_sec": 39.8 },
+          { "round": 3, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.72, "aggregation_time_sec": 0.3, "total_training_time_sec": 38.3 }
+        ],
+        "scalability": [
+          { "clients_count": 2, "estimated_round_duration_sec": 28.0, "estimated_bandwidth_kb": 112.4, "storage_overhead_mb": 0.22, "aggregation_overhead_sec": 0.20 },
+          { "clients_count": 4, "estimated_round_duration_sec": 38.3, "estimated_bandwidth_kb": 224.8, "storage_overhead_mb": 0.44, "aggregation_overhead_sec": 0.30 },
+          { "clients_count": 8, "estimated_round_duration_sec": 52.1, "estimated_bandwidth_kb": 449.6, "storage_overhead_mb": 0.88, "aggregation_overhead_sec": 0.48 }
+        ]
+      }
+    },
+    "6": {
+      "organizations": [
+        { "id": "bank",     "name": "Nova-Bank-Node",           "type": "bank",     "status": "online", "datasetSize": 2200 },
+        { "id": "hospital", "name": "Boston-Central-Hospital",  "type": "hospital", "status": "online", "datasetSize": 1500 },
+        { "id": "retail",   "name": "Apex-Retail-POS",          "type": "retail",   "status": "online", "datasetSize": 5000 },
+        { "id": "telecom",  "name": "Nova-Telecom-Node",        "type": "telecom",  "status": "online", "datasetSize": 4500 }
+      ],
+      "rounds": [
+        { "round": 1, "accuracy": 0.75,   "loss": 0.44,  "f1": 0.48,  "timestamp": "2026-07-03T10:00:00Z" },
+        { "round": 2, "accuracy": 0.86,   "loss": 0.30,  "f1": 0.61,  "timestamp": "2026-07-03T10:01:00Z" },
+        { "round": 3, "accuracy": 0.9805, "loss": 0.081, "f1": 0.528, "timestamp": "2026-07-03T10:02:00Z" }
+      ],
+      "status": "idle",
+      "currentRound": 3,
+      "globalAccuracy": 0.9805,
+      "globalLoss": 0.081,
+      "globalF1": 0.528,
+      "incidents": [
+        {
+          "incident_id": "INC-2026-BOTNET",
+          "timestamp": "2026-07-03T10:05:00Z",
+          "organization": "Apex-Retail-POS",
+          "predicted_attack": "Bot",
+          "confidence": 0.945,
+          "severity": "HIGH",
+          "executive_summary": "Active C2 beaconing and Botnet orchestration detected at Apex-Retail-POS terminal node.",
+          "technical_summary": "Periodic connection beacons flagged via same_srv_rate metrics. Consistent outbound socket callouts confirm command and control channels are active.",
+          "mitre_attack": ["T1105", "T1071"],
+          "kill_chain_phase": "Command and Control",
+          "affected_assets": ["Apex-POS Terminal 12", "Retail Store VLAN gateway"],
+          "recommended_actions": ["Block origin IP domains", "Verify active running software hashes on terminal"],
+          "containment_steps": ["Quarantine POS endpoint", "Apply outbound DNS filtering blocks"],
+          "confidence_reasoning": "Connection periodic interval signature triggers Bot model flags.",
+          "limitations": "Endpoint hashes are encrypted locally, blocking validation.",
+          "references": ["https://attack.mitre.org/techniques/T1105"],
+          "explainability": {
+            "supporting_evidence": ["count = 95 (Normal: 1)", "same_srv_rate = 1.0 (Normal: 0.95)"],
+            "top_contributing_features": ["count", "same_srv_rate", "serror_rate"],
+            "feature_importance": { "count": 0.40, "same_srv_rate": 0.40, "serror_rate": 0.20 },
+            "prediction_probability": 0.945,
+            "evidence_summary": "Periodic high-uniform same-service socket connections confirm C2 check-in indicators."
+          },
+          "federated_model_version": "1.0.0",
+          "global_checkpoint_version": "round_3.pkl",
+          "dataset_version": "CICIDS2017-pruned",
+          "benchmark_version": "v1.1",
+          "prompt_version": "v1.0",
+          "llm_provider": "ollama",
+          "llm_model": "llama3.1"
+        }
+      ],
+      "benchmarks": {
+        "localVsGlobal": {
+          "bank":     { "local": { "accuracy": 0.712 }, "global": { "accuracy": 0.9805 } },
+          "hospital": { "local": { "accuracy": 0.698 }, "global": { "accuracy": 0.9805 } },
+          "retail":   { "local": { "accuracy": 0.743 }, "global": { "accuracy": 0.9805 } },
+          "telecom":  { "local": { "accuracy": 0.731 }, "global": { "accuracy": 0.9805 } }
+        },
+        "convergence": [
+          { "round": 1, "accuracy": 0.75,   "loss": 0.44,  "precision": 0.71, "recall": 0.69, "macro_f1": 0.48,  "weighted_f1": 0.50 },
+          { "round": 2, "accuracy": 0.86,   "loss": 0.30,  "precision": 0.83, "recall": 0.81, "macro_f1": 0.61,  "weighted_f1": 0.63 },
+          { "round": 3, "accuracy": 0.9805, "loss": 0.081, "precision": 0.97, "recall": 0.96, "macro_f1": 0.528, "weighted_f1": 0.95 }
+        ],
+        "clientDrift": {
+          "bank":     [323.62, 310.44, 298.12],
+          "hospital": [290.92, 274.11, 261.80],
+          "retail":   [200.76, 194.55, 188.20],
+          "telecom":  [267.64, 255.30, 241.95]
+        },
+        "communication": [
+          { "round": 1, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.80, "aggregation_time_sec": 0.3, "total_training_time_sec": 42.1 },
+          { "round": 2, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.75, "aggregation_time_sec": 0.3, "total_training_time_sec": 39.8 },
+          { "round": 3, "model_size_kb": 56.2, "upload_size_kb": 56.2, "download_size_kb": 56.2, "total_bandwidth_kb": 112.4, "communication_time_sec": 0.72, "aggregation_time_sec": 0.3, "total_training_time_sec": 38.3 }
+        ],
+        "scalability": [
+          { "clients_count": 2, "estimated_round_duration_sec": 28.0, "estimated_bandwidth_kb": 112.4, "storage_overhead_mb": 0.22, "aggregation_overhead_sec": 0.20 },
+          { "clients_count": 4, "estimated_round_duration_sec": 38.3, "estimated_bandwidth_kb": 224.8, "storage_overhead_mb": 0.44, "aggregation_overhead_sec": 0.30 },
+          { "clients_count": 8, "estimated_round_duration_sec": 52.1, "estimated_bandwidth_kb": 449.6, "storage_overhead_mb": 0.88, "aggregation_overhead_sec": 0.48 }
+        ]
+      }
+    }
+  }
+}

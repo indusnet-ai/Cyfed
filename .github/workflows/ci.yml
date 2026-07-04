@@ -1,0 +1,52 @@
+name: FedSOC AI Continuous Integration
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout codebase repository
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. NodeJS environment setup
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Install Node Dependencies
+      run: npm ci
+
+    - name: Run Next.js Production Build
+      run: npm run --prefix apps/dashboard build
+
+    # 3. Python environment setup for ML pipelines
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Python Package Manager (uv)
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+    - name: Install Python Dependencies & Run Pytest
+      run: |
+        cd python/fedsoc
+        uv venv
+        .venv/bin/pip install -e .
+        .venv/bin/pip install pytest
+        .venv/bin/pytest fedsoc/tests/test_ai_analyst.py
+
+    # 4. Build verify Docker images
+    - name: Docker Build Check
+      run: docker build -t fedsoc-dashboard:ci .

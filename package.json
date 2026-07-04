@@ -1,0 +1,19 @@
+{
+  "name": "fedsoc-ai-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Federated AI Platform for Collaborative SOC and Cyber Threat Intelligence",
+  "scripts": {
+    "dev": "pnpm --filter dashboard dev",
+    "build": "pnpm -r build",
+    "test:ts": "pnpm -r test",
+    "lint:ts": "pnpm -r lint",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md,js,css}\""
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "prettier": "^3.2.5",
+    "eslint": "^8.57.0",
+    "vitest": "^1.3.1"
+  }
+}

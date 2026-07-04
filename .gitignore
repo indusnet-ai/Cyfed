@@ -1,0 +1,52 @@
+# Node/pnpm
+node_modules
+.pnpm-debug.log*
+.npm
+.eslintcache
+
+# Next.js build output
+.next/
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.uv/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Large Datasets & Local Artifacts Cache
+Dataset/
+datasets/
+artifacts/

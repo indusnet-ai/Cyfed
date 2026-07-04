@@ -1,0 +1,23 @@
+[project]
+name = "flower-server"
+version = "0.1.0"
+description = "Flower Federated Learning Server for FedSOC AI"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flwr>=1.8.0",
+    "loguru>=0.7.0",
+    "fedcore",
+    "fedsoc"
+]
+
+[tool.uv.sources]
+fedcore = { path = "../../python/fedcore" }
+fedsoc = { path = "../../python/fedsoc" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["server.py"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
