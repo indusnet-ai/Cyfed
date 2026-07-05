@@ -37,20 +37,17 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
-    - name: Install Python Package Manager (uv)
-      run: |
-        curl -LsSf https://astral.sh/uv/install.sh | sh
-        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    - name: Setup uv
+      uses: astral-sh/setup-uv@v1
+      with:
+        enable-cache: true
 
     - name: Install Python Dependencies & Run Pytest
       run: |
         cd python/fedsoc
-        uv venv
-        .venv/bin/pip install -e .
-        .venv/bin/pip install pytest
-        .venv/bin/pytest fedsoc/tests/test_ai_analyst.py
+        uv run pytest fedsoc/tests/test_ai_analyst.py
 
     # 4. Build verify Docker images
     - name: Docker Build Check
