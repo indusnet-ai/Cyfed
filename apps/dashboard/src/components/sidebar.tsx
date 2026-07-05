@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/useLanguageContext';
 import { 
   Shield, 
@@ -14,7 +14,8 @@ import {
   Database,
   Sliders,
   Sparkles,
-  BarChart2
+  BarChart2,
+  LogOut
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -23,6 +24,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
   const pathname = usePathname();
+  const router = useRouter();
   const { t } = useLanguage();
 
   const links = [
@@ -43,7 +45,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
           <Shield className="w-5 h-5" />
         </div>
         <div>
-          <span className="font-extrabold text-sm text-white tracking-wider uppercase">FedSOC</span>
+          <span className="font-extrabold text-sm text-white tracking-wider uppercase">Cyfed</span>
           <span className="text-[10px] text-slate-500 font-bold block -mt-1 tracking-widest uppercase">
             {t('coreHealth', 'Command Center')}
           </span>
@@ -71,6 +73,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
           );
         })}
       </nav>
+
+      {/* Logout Button */}
+      <div className="px-4 py-3 border-t border-slate-900/60">
+        <button
+          onClick={() => router.push('/login')}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wide text-rose-400 hover:text-white hover:bg-rose-950/20 border border-transparent hover:border-rose-900/10 transition-all duration-200"
+        >
+          <LogOut className="w-4 h-4" />
+          {t('logout', 'Logout')}
+        </button>
+      </div>
 
       {/* Footer Info */}
       <div className="p-4 border-t border-slate-900 flex items-center justify-between text-[10px] text-slate-500 font-semibold uppercase tracking-wider">

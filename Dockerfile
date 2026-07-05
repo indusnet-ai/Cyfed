@@ -1,12 +1,13 @@
-# Multi-stage build for FedSOC Dashboard
+# Multi-stage build for Cyfed Dashboard
 FROM node:18-alpine AS base
+RUN npm install -g pnpm
 
 # Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-COPY package*.json ./
-COPY apps/dashboard/package*.json ./apps/dashboard/
-RUN npm ci
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/dashboard/package.json ./apps/dashboard/
+RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -19,7 +20,7 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-RUN npm run --prefix apps/dashboard build
+RUN pnpm --filter dashboard build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -42,4 +43,4 @@ USER nextjs
 
 EXPOSE 3000
 
-CMD ["npm", "run", "--prefix", "apps/dashboard", "start"]
+CMD ["pnpm", "--filter", "dashboard", "start"]

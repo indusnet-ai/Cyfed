@@ -26,7 +26,7 @@ export default function MarketingLandingPage() {
             <Shield className="w-6 h-6" />
           </div>
           <div>
-            <span className="font-extrabold text-base tracking-wider uppercase block">FedSOC AI</span>
+            <span className="font-extrabold text-base tracking-wider uppercase block">Cyfed</span>
             <span className="text-[10px] text-slate-500 font-bold block -mt-1 tracking-widest uppercase">Federated Cyber Intel</span>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function MarketingLandingPage() {
         </h1>
         
         <p className="text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed">
-          FedSOC AI leverages secure **Federated Learning (FedCore)** to train local security classifiers across multiple organizational silos, culminating in a global model with **97.96% accuracy** while preserving absolute data sovereignty.
+          Cyfed leverages secure **Federated Learning (FedCore)** to train local security classifiers across multiple organizational silos, culminating in a global model with **97.96% accuracy** while preserving absolute data sovereignty.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -142,7 +142,7 @@ export default function MarketingLandingPage() {
               Hosting security logs in centralized cloud repositories yields significant data ingestion costs, bandwidth bottlenecks, and regulatory liabilities (GDPR, PCI-DSS).
             </p>
             <p className="text-slate-400 text-xs leading-relaxed">
-              FedSOC AI eliminates raw data transfers entirely by transmitting only mathematical model parameter checkpoints. This delivers **99.99% network bandwidth reduction** and simplifies compliance audits.
+              Cyfed eliminates raw data transfers entirely by transmitting only mathematical model parameter checkpoints. This delivers **99.99% network bandwidth reduction** and simplifies compliance audits.
             </p>
             
             <div className="grid grid-cols-2 gap-4 pt-2">
@@ -183,7 +183,7 @@ export default function MarketingLandingPage() {
 
       {/* Footer */}
       <footer className="h-20 border-t border-slate-900/60 bg-[#090d16]/30 flex items-center justify-between px-8 md:px-16 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
-        <span>© {new Date().getFullYear()} FedSOC AI. All Rights Reserved.</span>
+        <span>© {new Date().getFullYear()} Cyfed. All Rights Reserved.</span>
         <span>Version 1.0.0 Stable</span>
       </footer>
     </div>

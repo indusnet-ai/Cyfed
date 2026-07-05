@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FedSOC AI: Collaborative Cyber Threat Detection",
+  title: "Cyfed: Collaborative Cyber Threat Detection",
   description: "Secure, decentralized cybersecurity threat intelligence platform powered by Federated Learning and Llama 3.1",
 };
 

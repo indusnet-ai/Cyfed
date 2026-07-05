@@ -30,6 +30,7 @@ const dictionary: Record<Language, Record<string, string>> = {
     coreHealth: 'Core Health',
     secure: 'Secure',
     version: 'Version',
+    logout: 'Logout',
     
     // Overview / Command Center
     execCommandCenter: 'Executive Command Center',
@@ -109,6 +110,7 @@ const dictionary: Record<Language, Record<string, string>> = {
     coreHealth: 'முக்கிய ஆரோக்கியம்',
     secure: 'பாதுகாப்பானது',
     version: 'பதிப்பு',
+    logout: 'வெளியேறு',
     
     // Overview / Command Center
     execCommandCenter: 'நிர்வாகக் கட்டுப்பாட்டு மையம்',

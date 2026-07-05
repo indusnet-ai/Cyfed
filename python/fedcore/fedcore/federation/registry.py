@@ -29,15 +29,18 @@ class ClientRegistry:
         
         if self.dashboard_url:
             try:
-                url = f"{self.dashboard_url}/api/federation/nodes?id={client_id}"
+                url = f"{self.dashboard_url}/api/nodes?id={client_id}"
+                # Map client_name profile into valid Zod types, and status 'online' to 'idle'
+                valid_type = client_name.lower() if client_name.lower() in ['bank', 'hospital', 'retail', 'telecom'] else 'generic'
+                valid_status = "idle" if status == "online" else status
+                
                 payload = {
-                    "name": client_name,
-                    "type": "organization",
-                    "status": status,
-                    "ipAddress": ip_address,
+                    "name": f"Nova-{client_name.capitalize()}-Node",
+                    "type": valid_type,
+                    "status": valid_status,
+                    "ipAddress": ip_address if ip_address != "localhost" else "127.0.0.1",
                     "datasetSize": dataset_size
                 }
-                # Also support legacy routing for compatibility
                 response = httpx.post(url, json=payload, timeout=5.0)
                 if response.status_code == 200:
                     logger.debug(f"Successfully posted registration of node {client_name} to dashboard.")

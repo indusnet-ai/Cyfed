@@ -19,7 +19,8 @@ class MockSupabaseClient {
     const initialNodes: FLNode[] = [
       { id: '11111111-1111-1111-1111-111111111111', name: 'Boston-Central-Hospital', type: 'hospital', status: 'idle', lastActive: new Date().toISOString(), datasetSize: 1500 },
       { id: '22222222-2222-2222-2222-222222222222', name: 'Apex-Retail-POS', type: 'retail', status: 'idle', lastActive: new Date().toISOString(), datasetSize: 5000 },
-      { id: '33333333-3333-3333-3333-333333333333', name: 'Nova-Bank-Node', type: 'bank', status: 'offline', lastActive: new Date(Date.now() - 3600000).toISOString(), datasetSize: 2200 }
+      { id: '33333333-3333-3333-3333-333333333333', name: 'Nova-Bank-Node', type: 'bank', status: 'offline', lastActive: new Date(Date.now() - 3600000).toISOString(), datasetSize: 2200 },
+      { id: '44444444-4444-4444-4444-444444444444', name: 'Nova-Telecom-Node', type: 'telecom', status: 'offline', lastActive: new Date(Date.now() - 3600000).toISOString(), datasetSize: 4200 }
     ];
     initialNodes.forEach(node => this.nodes.set(node.id, node));
 
@@ -215,7 +216,13 @@ class MockSupabaseClient {
             // Normal Select Query
             let resultData: any[] = [];
             if (table === 'nodes') {
-              resultData = Array.from(self.nodes.values());
+              resultData = Array.from(self.nodes.values()).map((node: any) => {
+                // Keep the mock nodes fresh so they do not prune/offline after 60s in local development
+                if (node.status !== 'offline') {
+                  return { ...node, lastActive: new Date().toISOString() };
+                }
+                return node;
+              });
             } else if (table === 'rounds' || table === 'training_rounds') {
               if (table === 'training_rounds') {
                 resultData = self.rounds.map(r => ({
